@@ -16,11 +16,10 @@ namespace Alura_Backend_Challenge5.Controllers
             _filmesRepository = filmesRepository;
         }
         [HttpGet]
-        public IActionResult GetFilmes()
+        public List<Filmes> GetFilmes()
         {
 
-            var filmes = _filmesRepository.GetFilmes();
-            return Ok(filmes);
+            return _filmesRepository.GetFilmes();
         }
     }
 }
