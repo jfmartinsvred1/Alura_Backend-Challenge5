@@ -2,7 +2,7 @@
 
 namespace Alura_Backend_Challenge5.Models
 {
-    public class Filmes
+    public class FIlme
     {
         public int filmeId { get; set; }
         public string Titulo { get; set; }

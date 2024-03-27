@@ -1,27 +1,40 @@
 ﻿using Alura_Backend_Challenge5.Models;
 using Dapper;
 using MySql.Data.MySqlClient;
-using System.Text.Json;
 
 namespace Alura_Backend_Challenge5.Data.Dapper
 {
     public class FilmesRepository : IFilmesRepository
     {
         private IConfiguration _configuration;
-        private string _connection;
 
-        public FilmesRepository(IConfiguration configuration, string connection)
+        public FilmesRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            _connection = _configuration.GetConnectionString("Default");
         }
 
-
-        public List<Filmes> GetFilmes()
+        public FIlme GetFIlme(int id)
         {
-            using (var a = new MySqlConnection(_connection))
+            var connetctionString = _configuration.GetConnectionString("Default");
+
+            var sql = @"Select * from filmes where FilmeId= @Id";
+
+            using (var a = new MySqlConnection(connetctionString))
             {
-                List<Filmes> filmes = (a.Query<Filmes>("Select * from filmes")).ToList();
+                FIlme filme = (a.QueryFirstOrDefault<FIlme>(sql,new {Id =id}));
+                return filme;
+            }
+        }
+
+        public List<FIlme> GetFilmes()
+        {
+            var connetctionString = _configuration.GetConnectionString("Default");
+
+            var sql = @"Select * from filmes";
+
+            using (var a = new MySqlConnection(connetctionString))
+            {
+                List<FIlme> filmes = (a.Query<FIlme>(sql)).ToList();
                 return filmes;
             }
 

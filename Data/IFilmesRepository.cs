@@ -4,6 +4,7 @@ namespace Alura_Backend_Challenge5.Data
 {
     public interface IFilmesRepository
     {
-        List<Filmes> GetFilmes();
+        List<FIlme> GetFilmes();
+        FIlme GetFIlme(int id);
     }
 }
